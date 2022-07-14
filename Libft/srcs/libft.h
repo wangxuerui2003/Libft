@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wxuerui <wxuerui@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*   By: wxuerui <wxuerui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:41:09 by wxuerui           #+#    #+#             */
-/*   Updated: 2022/07/05 19:19:38 by wxuerui          ###   ########.fr       */
+/*   Updated: 2022/07/14 19:41:15 by wxuerui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,26 @@
 # include <stddef.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_flags
+{
+	int		zero;
+	int		minus;
+	int		dot;
+	int		hash;
+	int		space;
+	int		plus;
+	int		width;
+	int		precision;
+	char	c;
+}	t_flags;
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -67,5 +81,17 @@ void		ft_lstdelone(t_list *lst, void (*del)(void *));
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_printf(const char *format, ...);
+int		ft_putvoidptr(unsigned long long ptr, t_flags *flags);
+int		ft_print_hex(unsigned int nbr, char *base, t_flags *flags);
+int		ft_putunsign(unsigned int nb, t_flags *flags);
+int		ft_putcharf(char c, t_flags *flags);
+int		ft_putnbrf(int num, t_flags *flags);
+int		ft_putstrf(char *str, t_flags *flags);
+void	ft_get_flags(const char *format, int *i, t_flags *flags);
+void	ft_set_flags(t_flags *flags);
+int		ft_print_chars(char c, int rep);
+int		ft_putnbrstrf(char *str, t_flags *flags);
+char	*ft_uitoa_base(unsigned int num, char *base);
 
 #endif
